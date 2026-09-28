@@ -1,0 +1,47 @@
+<Project>
+
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+  <PropertyGroup Label="Shipping libraries">
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+
+    <!-- Public surface quality -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <EnableAotAnalyzer>true</EnableAotAnalyzer>
+    <IsAotCompatible>true</IsAotCompatible>
+    <IsTrimmable>true</IsTrimmable>
+
+    <!-- Packaging -->
+    <IsPackable>true</IsPackable>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <!--
+      Baseline validation compares this build against the last published package and fails
+      on a breaking change. It stays off until 0.1.0 exists on nuget.org; see
+      docs/guides/releasing.md -> "After the release".
+    -->
+    <PackageValidationBaselineVersion Condition="'$(DecisionKitBaselineVersion)' != ''">$(DecisionKitBaselineVersion)</PackageValidationBaselineVersion>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>decision;decision-engine;jev;typesafe;ai;evaluation;provider</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)../README.md" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup Label="Public API tracking">
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <AdditionalFiles Include="PublicAPI.Shipped.txt" />
+    <AdditionalFiles Include="PublicAPI.Unshipped.txt" />
+  </ItemGroup>
+
+  <ItemGroup Label="Test visibility">
+    <InternalsVisibleTo Include="$(MSBuildProjectName).Tests" />
+    <InternalsVisibleTo Include="DecisionKit.ContractTests" />
+  </ItemGroup>
+
+</Project>

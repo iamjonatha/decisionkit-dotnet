@@ -1,0 +1,43 @@
+{
+  "model": "jev-1.13.0",
+  "answers": {
+    "is_urgent": {
+      "type": "noul",
+      "noul": 0.97
+    },
+    "department": {
+      "type": "choice",
+      "choice": "Billing",
+      "confidence": 0.78,
+      "probabilities": {
+        "Sales": 0.02,
+        "Billing": 0.93,
+        "Support": 0.05
+      }
+    },
+    "frustration": {
+      "type": "score",
+      "score": 1.42,
+      "confidence": 0.81,
+      "legend": {
+        "0": "Calm, just stating facts",
+        "1": "Frustrated but civil",
+        "2": "Very angry, strong language"
+      },
+      "probabilities": {
+        "0": 0.12,
+        "1": 0.34,
+        "2": 0.54
+      }
+    },
+    "tone": {
+      "type": "sentiment",
+      "label": "negative",
+      "intensity": 0.7
+    }
+  },
+  "usage": {
+    "input_tokens": 392,
+    "output_tokens": 65
+  }
+}

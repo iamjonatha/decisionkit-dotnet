@@ -1,0 +1,6 @@
+# Rules relaxed for samples only. A sample is read, not profiled.
+[*.cs]
+
+# CA1859: prefer concrete types for performance. Samples deliberately hold the abstraction,
+# because showing that the application depends on IDecisionProvider is the point of the sample.
+dotnet_diagnostic.CA1859.severity = none

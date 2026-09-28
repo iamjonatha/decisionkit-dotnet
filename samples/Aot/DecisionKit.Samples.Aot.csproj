@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--
+      This sample is the smoke test for the claim the packages make. It compiles ahead of time with
+      full trimming, and the build fails on any trim or AOT warning, so an unannotated reflection
+      call in a shipping package cannot reach a release unnoticed.
+    -->
+    <PublishAot>true</PublishAot>
+    <TrimMode>full</TrimMode>
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <UseSystemResourceKeys>true</UseSystemResourceKeys>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/DecisionKit.Extensions/DecisionKit.Extensions.csproj" />
+    <ProjectReference Include="../../src/DecisionKit.Testing/DecisionKit.Testing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+  </ItemGroup>
+
+</Project>

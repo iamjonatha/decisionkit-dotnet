@@ -1,0 +1,10 @@
+# Rules relaxed for benchmarks only.
+[*.cs]
+
+# CA1822: mark members as static. BenchmarkDotNet calls benchmark methods on an instance it owns,
+# so a static benchmark is not a benchmark.
+dotnet_diagnostic.CA1822.severity = none
+
+# CA1515: types can be internal. BenchmarkDotNet discovers benchmarks by reflecting over public
+# types, so a benchmark class has to be public.
+dotnet_diagnostic.CA1515.severity = none

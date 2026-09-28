@@ -1,0 +1,10 @@
+# Default owner for everything in the repository.
+*       @iamjonatha
+
+# The provider-independent core and the public contribution rules carry the
+# strictest review requirements.
+/src/DecisionKit.Core/  @iamjonatha
+/docs/adr/              @iamjonatha
+/CONTRIBUTING.md        @iamjonatha
+/SECURITY.md            @iamjonatha
+/.github/workflows/     @iamjonatha

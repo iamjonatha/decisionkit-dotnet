@@ -1,0 +1,10 @@
+; Test projects only.
+;
+; The Async suffix exists so that a caller can see, at the call site, that a method has to be
+; awaited. A test method has no call site: xUnit invokes it by reflection, and the name is read as
+; a sentence describing the behaviour under test. Appending Async to
+; "DecideAsync_PostsTheRequestToTheEvaluationEndpoint" adds nothing and hides the sentence, so the
+; rule is switched off here and stays on everywhere else.
+
+[*.cs]
+dotnet_naming_rule.async_methods_have_suffix.severity = none

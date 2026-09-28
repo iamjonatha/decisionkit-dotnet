@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/DecisionKit.Core/DecisionKit.Core.csproj" />
+    <ProjectReference Include="../../src/DecisionKit.Testing/DecisionKit.Testing.csproj" />
+  </ItemGroup>
+
+</Project>

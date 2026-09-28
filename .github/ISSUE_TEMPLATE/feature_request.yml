@@ -1,0 +1,58 @@
+name: Feature request
+description: Propose a new capability or an API change
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        All issues must be written in English.
+
+        Before proposing, check that the request does not require `DecisionKit.Core` to
+        know about a specific provider. Provider-specific capabilities belong in the
+        provider package.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What can you not do today, and why does the current API get in the way?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API or behaviour
+      render: csharp
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: true
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Which layer should own this?
+      options:
+        - DecisionKit.Core (provider independent)
+        - DecisionKit.Jev (provider specific)
+        - DecisionKit.Extensions (hosting integration)
+        - DecisionKit.Testing (test doubles)
+        - A new package
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Architectural constraints
+      options:
+        - label: This does not introduce a provider dependency into `DecisionKit.Core`
+          required: true
+        - label: This does not require a non-Microsoft runtime dependency
+          required: true

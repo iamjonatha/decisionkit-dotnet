@@ -1,0 +1,63 @@
+name: Bug report
+description: Report incorrect or unexpected behaviour
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        All issues must be written in English. Never include API keys, tokens or real
+        customer data in an issue.
+
+  - type: dropdown
+    id: package
+    attributes:
+      label: Affected package
+      options:
+        - DecisionKit.Core
+        - DecisionKit.Jev
+        - DecisionKit.Extensions
+        - DecisionKit.Testing
+        - Build / CI / documentation
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      placeholder: 0.1.0
+    validations:
+      required: true
+
+  - type: input
+    id: tfm
+    attributes:
+      label: Target framework
+      placeholder: net10.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Include the exception type and message. Redact any secret.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: The smallest code that reproduces the problem.
+      render: csharp
+    validations:
+      required: true

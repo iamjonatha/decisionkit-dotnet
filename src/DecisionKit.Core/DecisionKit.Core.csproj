@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>DecisionKit</RootNamespace>
+    <Description>Provider-independent, strongly typed decision domain model for .NET: questions, answers, results, and the decision provider abstraction. Contains no provider, HTTP or protocol code.</Description>
+  </PropertyGroup>
+
+</Project>
