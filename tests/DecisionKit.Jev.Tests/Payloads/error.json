@@ -1,0 +1,6 @@
+{
+  "detail": {
+    "error_type": "invalid_request_error",
+    "message": "questions.department.criteria: choice questions require at least two options"
+  }
+}

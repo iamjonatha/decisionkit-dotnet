@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>DecisionKit.Testing</RootNamespace>
+    <Description>Deterministic test doubles for DecisionKit: fake providers, canned results, request capture and error injection. No HTTP, no real provider calls.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../DecisionKit.Core/DecisionKit.Core.csproj" />
+  </ItemGroup>
+
+</Project>

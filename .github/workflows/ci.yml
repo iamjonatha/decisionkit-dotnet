@@ -1,0 +1,133 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Restore
+        run: dotnet restore DecisionKit.slnx
+
+      - name: Verify formatting
+        run: dotnet format DecisionKit.slnx --verify-no-changes --no-restore
+
+      - name: Build
+        run: dotnet build DecisionKit.slnx -c Release --no-restore
+
+      - name: Test
+        run: dotnet test --solution DecisionKit.slnx -c Release --no-build
+
+      - name: Run offline samples
+        run: |
+          dotnet run --project samples/Basic -c Release --no-build
+          dotnet run --project samples/CustomProvider -c Release --no-build
+          dotnet run --project samples/Testing -c Release --no-build
+          dotnet run --project samples/Resilience -c Release --no-build
+
+  aot:
+    name: Native AOT publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      # The interesting failure is a trim or AOT warning, which is an error here. Running the
+      # binary afterwards proves the trimmer did not remove something the code still needs.
+      - name: Publish
+        run: dotnet publish samples/Aot -c Release -r linux-x64
+
+      - name: Run the native binary
+        run: ./artifacts/publish/DecisionKit.Samples.Aot/release_linux-x64/DecisionKit.Samples.Aot
+
+  benchmarks:
+    name: Benchmarks (smoke)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      # A dry run proves every benchmark still compiles and executes. Measured numbers from a
+      # shared CI runner would be noise, so no timings are collected or published here.
+      - name: Dry run
+        run: |
+          dotnet run --project benchmarks/DecisionKit.Benchmarks -c Release -- --filter '*' --job Dry | tee benchmarks.log
+          if grep -q 'Benchmarks with issues' benchmarks.log; then
+            echo '::error::One or more benchmarks failed to run.'
+            exit 1
+          fi
+
+  package:
+    name: Pack
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Pack
+        run: dotnet pack DecisionKit.slnx -c Release -o ./nupkg
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nupkg
+          path: ./nupkg/*.nupkg
+          if-no-files-found: error

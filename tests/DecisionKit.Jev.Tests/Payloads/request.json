@@ -1,0 +1,42 @@
+{
+  "state": {
+    "channel": "email",
+    "customer_tier": 2,
+    "text": "I was charged twice for the same order."
+  },
+  "model": "jev-latest",
+  "questions": {
+    "is_urgent": {
+      "type": "noul",
+      "instructions": "Whether the ticket needs attention today"
+    },
+    "department": {
+      "type": "choice",
+      "instructions": "Which team should handle this ticket",
+      "criteria": {
+        "Sales": null,
+        "Billing": null,
+        "Support": null
+      }
+    },
+    "frustration": {
+      "type": "score",
+      "instructions": "How frustrated the customer appears",
+      "criteria": [
+        "Calm, just stating facts",
+        "Frustrated but civil",
+        "Very angry, strong language"
+      ]
+    },
+    "tone": {
+      "type": "sentiment",
+      "instructions": "What is the tone of this message?",
+      "criteria": {
+        "labels": [
+          "positive",
+          "negative"
+        ]
+      }
+    }
+  }
+}

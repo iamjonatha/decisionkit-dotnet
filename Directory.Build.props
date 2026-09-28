@@ -1,0 +1,52 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Product identity -->
+    <Product>DecisionKit</Product>
+    <Authors>Jonatha Panni</Authors>
+    <Company>Jonatha Panni</Company>
+    <Copyright>Copyright (c) 2026 Jonatha Panni</Copyright>
+
+    <!-- Versioning: Semantic Versioning 2.0.0. Bump VersionPrefix in this file only. -->
+    <VersionPrefix>0.1.0</VersionPrefix>
+
+    <!--
+      The last version published to nuget.org. Empty means nothing has been published yet.
+      Set it to the previous release right after publishing, so that package validation can
+      compare the next build against it.
+    -->
+    <DecisionKitBaselineVersion></DecisionKitBaselineVersion>
+
+    <!-- Repository -->
+    <RepositoryUrl>https://github.com/iamjonatha/decisionkit-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/iamjonatha/decisionkit-dotnet</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Language -->
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+
+    <!-- Correctness gates -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    <!-- Deterministic, reproducible output -->
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+
+    <!-- Single output root, easy to clean and to publish from CI -->
+    <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
+
+    <!-- Supply chain -->
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <NuGetAuditLevel>low</NuGetAuditLevel>
+  </PropertyGroup>
+
+</Project>

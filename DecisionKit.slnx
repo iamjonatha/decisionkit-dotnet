@@ -1,0 +1,25 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DecisionKit.Core/DecisionKit.Core.csproj" />
+    <Project Path="src/DecisionKit.Extensions/DecisionKit.Extensions.csproj" />
+    <Project Path="src/DecisionKit.Jev/DecisionKit.Jev.csproj" />
+    <Project Path="src/DecisionKit.Testing/DecisionKit.Testing.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DecisionKit.Core.Tests/DecisionKit.Core.Tests.csproj" />
+    <Project Path="tests/DecisionKit.Extensions.Tests/DecisionKit.Extensions.Tests.csproj" />
+    <Project Path="tests/DecisionKit.Jev.Tests/DecisionKit.Jev.Tests.csproj" />
+    <Project Path="tests/DecisionKit.Testing.Tests/DecisionKit.Testing.Tests.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/Aot/DecisionKit.Samples.Aot.csproj" />
+    <Project Path="samples/Basic/DecisionKit.Samples.Basic.csproj" />
+    <Project Path="samples/CustomProvider/DecisionKit.Samples.CustomProvider.csproj" />
+    <Project Path="samples/DependencyInjection/DecisionKit.Samples.DependencyInjection.csproj" />
+    <Project Path="samples/Resilience/DecisionKit.Samples.Resilience.csproj" />
+    <Project Path="samples/Testing/DecisionKit.Samples.Testing.csproj" />
+  </Folder>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/DecisionKit.Benchmarks/DecisionKit.Benchmarks.csproj" />
+  </Folder>
+</Solution>

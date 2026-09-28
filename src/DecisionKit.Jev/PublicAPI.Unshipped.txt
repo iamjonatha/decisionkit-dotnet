@@ -1,0 +1,267 @@
+#nullable enable
+const DecisionKit.Jev.Protocol.JevProtocol.AmbiguousInputCode = "jev_state_ambiguous" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.AmbiguousOptionsCode = "jev_choice_options_ambiguous" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.AuthenticationScheme = "Bearer" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.ConfidenceMetadataKey = "jev.confidence" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.CredentialMissingCode = "jev_credential_missing" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.DefaultBaseAddress = "https://api.typesafe.ai" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.DefaultModel = "jev-latest" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.ErrorTypeProperty = "jev.error_type" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.EvaluatePath = "v1/systemone" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.InputRequiredCode = "jev_state_required" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.InvalidQuestionDefinitionCode = "jev_question_definition_invalid" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.LegendMetadataKey = "jev.legend" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.MaximumChoiceOptions = 255 -> int
+const DecisionKit.Jev.Protocol.JevProtocol.MaximumScoreLevels = 10 -> int
+const DecisionKit.Jev.Protocol.JevProtocol.MinimumScoreLevels = 2 -> int
+const DecisionKit.Jev.Protocol.JevProtocol.ModelsPath = "v1/models" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.PayloadUnreadableCode = "jev_payload_unreadable" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.ProbabilitiesMetadataKey = "jev.probabilities" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.ProviderName = "jev" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.RawPayloadMetadataKey = "jev.raw" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.RequestIdHeader = "x-typesafe-request-id" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.RetryAfterMillisecondsHeader = "retry-after-ms" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.RetryAttemptsProperty = "jev.retry_attempts" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.StateTextKey = "text" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.StatusCodeProperty = "jev.status_code" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.TimeoutCode = "jev_timeout" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.TimeoutScopeProperty = "jev.timeout_scope" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.TooManyOptionsCode = "jev_choice_options_too_many" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.TransportFailureCode = "jev_transport_failure" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.UnmappableAnswerCode = "jev_answer_unmappable" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.UnnamedAnswerType = "unnamed" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.UnrepresentableMetadataCode = "jev_metadata_unrepresentable" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.UnsupportedOptionCode = "jev_option_unsupported" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.UnsupportedQuestionCode = "jev_question_unsupported" -> string!
+const DecisionKit.Jev.Protocol.JevProtocol.VersionSegment = "v1" -> string!
+const DecisionKit.Jev.Protocol.JevQuestionTypes.Choice = "choice" -> string!
+const DecisionKit.Jev.Protocol.JevQuestionTypes.Noul = "noul" -> string!
+const DecisionKit.Jev.Protocol.JevQuestionTypes.Score = "score" -> string!
+DecisionKit.Jev.Authentication.DelegateJevCredentialProvider
+DecisionKit.Jev.Authentication.DelegateJevCredentialProvider.DelegateJevCredentialProvider(System.Func<DecisionKit.Jev.Authentication.JevApiKey>! source) -> void
+DecisionKit.Jev.Authentication.DelegateJevCredentialProvider.DelegateJevCredentialProvider(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<DecisionKit.Jev.Authentication.JevApiKey>>! source) -> void
+DecisionKit.Jev.Authentication.DelegateJevCredentialProvider.GetApiKeyAsync(System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<DecisionKit.Jev.Authentication.JevApiKey>
+DecisionKit.Jev.Authentication.IJevCredentialProvider
+DecisionKit.Jev.Authentication.IJevCredentialProvider.GetApiKeyAsync(System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<DecisionKit.Jev.Authentication.JevApiKey>
+DecisionKit.Jev.Authentication.JevApiKey
+DecisionKit.Jev.Authentication.JevApiKey.Equals(DecisionKit.Jev.Authentication.JevApiKey other) -> bool
+DecisionKit.Jev.Authentication.JevApiKey.IsPresent.get -> bool
+DecisionKit.Jev.Authentication.JevApiKey.JevApiKey() -> void
+DecisionKit.Jev.Authentication.JevApiKey.JevApiKey(string! value) -> void
+DecisionKit.Jev.Authentication.StaticJevCredentialProvider
+DecisionKit.Jev.Authentication.StaticJevCredentialProvider.GetApiKeyAsync(System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<DecisionKit.Jev.Authentication.JevApiKey>
+DecisionKit.Jev.Authentication.StaticJevCredentialProvider.StaticJevCredentialProvider(DecisionKit.Jev.Authentication.JevApiKey apiKey) -> void
+DecisionKit.Jev.Authentication.StaticJevCredentialProvider.StaticJevCredentialProvider(string! apiKey) -> void
+DecisionKit.Jev.Client.JevDecisionProvider
+DecisionKit.Jev.Client.JevDecisionProvider.Capabilities.get -> DecisionKit.Providers.DecisionProviderCapabilities!
+DecisionKit.Jev.Client.JevDecisionProvider.DecideAsync(DecisionKit.Providers.DecisionRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<DecisionKit.Results.DecisionResult!>!
+DecisionKit.Jev.Client.JevDecisionProvider.JevDecisionProvider(System.Net.Http.HttpClient! httpClient, DecisionKit.Jev.Authentication.IJevCredentialProvider! credentials) -> void
+DecisionKit.Jev.Client.JevDecisionProvider.JevDecisionProvider(System.Net.Http.HttpClient! httpClient, DecisionKit.Jev.Authentication.IJevCredentialProvider! credentials, DecisionKit.Jev.Client.JevProviderOptions! options) -> void
+DecisionKit.Jev.Client.JevDecisionProvider.JevDecisionProvider(System.Net.Http.HttpClient! httpClient, DecisionKit.Jev.Authentication.IJevCredentialProvider! credentials, DecisionKit.Jev.Client.JevProviderOptions! options, Microsoft.Extensions.Logging.ILogger<DecisionKit.Jev.Client.JevDecisionProvider!>! logger) -> void
+DecisionKit.Jev.Client.JevDecisionProvider.JevDecisionProvider(System.Net.Http.HttpClient! httpClient, DecisionKit.Jev.Authentication.IJevCredentialProvider! credentials, DecisionKit.Jev.Client.JevProviderOptions! options, Microsoft.Extensions.Logging.ILogger<DecisionKit.Jev.Client.JevDecisionProvider!>! logger, System.TimeProvider! timeProvider) -> void
+DecisionKit.Jev.Client.JevDecisionProvider.Name.get -> string!
+DecisionKit.Jev.Client.JevDecisionProvider.Options.get -> DecisionKit.Jev.Client.JevProviderOptions!
+DecisionKit.Jev.Client.JevEndpoint
+DecisionKit.Jev.Client.JevEndpoint.BaseAddress.get -> System.Uri!
+DecisionKit.Jev.Client.JevEndpoint.Equals(DecisionKit.Jev.Client.JevEndpoint? other) -> bool
+DecisionKit.Jev.Client.JevEndpoint.Evaluate.get -> System.Uri!
+DecisionKit.Jev.Client.JevEndpoint.JevEndpoint(string! baseAddress) -> void
+DecisionKit.Jev.Client.JevEndpoint.JevEndpoint(System.Uri! baseAddress) -> void
+DecisionKit.Jev.Client.JevEndpoint.Models.get -> System.Uri!
+DecisionKit.Jev.Client.JevProviderOptions
+DecisionKit.Jev.Client.JevProviderOptions.AttemptTimeout.get -> System.TimeSpan
+DecisionKit.Jev.Client.JevProviderOptions.AttemptTimeout.init -> void
+DecisionKit.Jev.Client.JevProviderOptions.Endpoint.get -> DecisionKit.Jev.Client.JevEndpoint!
+DecisionKit.Jev.Client.JevProviderOptions.Endpoint.init -> void
+DecisionKit.Jev.Client.JevProviderOptions.JevProviderOptions() -> void
+DecisionKit.Jev.Client.JevProviderOptions.Mapping.get -> DecisionKit.Jev.Protocol.JevMappingOptions!
+DecisionKit.Jev.Client.JevProviderOptions.Mapping.init -> void
+DecisionKit.Jev.Client.JevProviderOptions.OperationTimeout.get -> System.TimeSpan
+DecisionKit.Jev.Client.JevProviderOptions.OperationTimeout.init -> void
+DecisionKit.Jev.Client.JevProviderOptions.Retry.get -> DecisionKit.Jev.Resilience.JevRetryPolicy!
+DecisionKit.Jev.Client.JevProviderOptions.Retry.init -> void
+DecisionKit.Jev.Client.JevProviderOptions.RetryDelayTimeout.get -> System.TimeSpan
+DecisionKit.Jev.Client.JevProviderOptions.RetryDelayTimeout.init -> void
+DecisionKit.Jev.Models.JevAnswer
+DecisionKit.Jev.Models.JevAnswer.Choice.get -> string?
+DecisionKit.Jev.Models.JevAnswer.Choice.init -> void
+DecisionKit.Jev.Models.JevAnswer.Confidence.get -> double?
+DecisionKit.Jev.Models.JevAnswer.Confidence.init -> void
+DecisionKit.Jev.Models.JevAnswer.Extensions.get -> System.Collections.Generic.Dictionary<string!, System.Text.Json.JsonElement>?
+DecisionKit.Jev.Models.JevAnswer.Extensions.set -> void
+DecisionKit.Jev.Models.JevAnswer.JevAnswer() -> void
+DecisionKit.Jev.Models.JevAnswer.Legend.get -> System.Text.Json.Nodes.JsonObject?
+DecisionKit.Jev.Models.JevAnswer.Legend.init -> void
+DecisionKit.Jev.Models.JevAnswer.Noul.get -> double?
+DecisionKit.Jev.Models.JevAnswer.Noul.init -> void
+DecisionKit.Jev.Models.JevAnswer.Probabilities.get -> System.Text.Json.Nodes.JsonObject?
+DecisionKit.Jev.Models.JevAnswer.Probabilities.init -> void
+DecisionKit.Jev.Models.JevAnswer.Score.get -> double?
+DecisionKit.Jev.Models.JevAnswer.Score.init -> void
+DecisionKit.Jev.Models.JevAnswer.Type.get -> string?
+DecisionKit.Jev.Models.JevAnswer.Type.init -> void
+DecisionKit.Jev.Models.JevErrorResponse
+DecisionKit.Jev.Models.JevErrorResponse.Detail.get -> System.Text.Json.Nodes.JsonNode?
+DecisionKit.Jev.Models.JevErrorResponse.Detail.init -> void
+DecisionKit.Jev.Models.JevErrorResponse.JevErrorResponse() -> void
+DecisionKit.Jev.Models.JevQuestion
+DecisionKit.Jev.Models.JevQuestion.Criteria.get -> System.Text.Json.Nodes.JsonNode?
+DecisionKit.Jev.Models.JevQuestion.Criteria.init -> void
+DecisionKit.Jev.Models.JevQuestion.Instructions.get -> System.Text.Json.Nodes.JsonNode?
+DecisionKit.Jev.Models.JevQuestion.Instructions.init -> void
+DecisionKit.Jev.Models.JevQuestion.JevQuestion() -> void
+DecisionKit.Jev.Models.JevQuestion.Type.get -> string?
+DecisionKit.Jev.Models.JevQuestion.Type.init -> void
+DecisionKit.Jev.Models.JevRequest
+DecisionKit.Jev.Models.JevRequest.JevRequest() -> void
+DecisionKit.Jev.Models.JevRequest.Model.get -> string?
+DecisionKit.Jev.Models.JevRequest.Model.init -> void
+DecisionKit.Jev.Models.JevRequest.Questions.get -> System.Collections.Generic.IReadOnlyDictionary<string!, DecisionKit.Jev.Models.JevQuestion!>!
+DecisionKit.Jev.Models.JevRequest.Questions.init -> void
+DecisionKit.Jev.Models.JevRequest.State.get -> System.Text.Json.Nodes.JsonNode?
+DecisionKit.Jev.Models.JevRequest.State.init -> void
+DecisionKit.Jev.Models.JevResponse
+DecisionKit.Jev.Models.JevResponse.Answers.get -> System.Collections.Generic.IReadOnlyDictionary<string!, DecisionKit.Jev.Models.JevAnswer!>!
+DecisionKit.Jev.Models.JevResponse.Answers.init -> void
+DecisionKit.Jev.Models.JevResponse.JevResponse() -> void
+DecisionKit.Jev.Models.JevResponse.Model.get -> string?
+DecisionKit.Jev.Models.JevResponse.Model.init -> void
+DecisionKit.Jev.Models.JevResponse.Usage.get -> DecisionKit.Jev.Models.JevUsage?
+DecisionKit.Jev.Models.JevResponse.Usage.init -> void
+DecisionKit.Jev.Models.JevUsage
+DecisionKit.Jev.Models.JevUsage.Extensions.get -> System.Collections.Generic.Dictionary<string!, System.Text.Json.JsonElement>?
+DecisionKit.Jev.Models.JevUsage.Extensions.set -> void
+DecisionKit.Jev.Models.JevUsage.InputTokens.get -> double?
+DecisionKit.Jev.Models.JevUsage.InputTokens.init -> void
+DecisionKit.Jev.Models.JevUsage.JevUsage() -> void
+DecisionKit.Jev.Models.JevUsage.OutputTokens.get -> double?
+DecisionKit.Jev.Models.JevUsage.OutputTokens.init -> void
+DecisionKit.Jev.Protocol.AnswerMapper
+DecisionKit.Jev.Protocol.AnswerMapper.AnswerMapper() -> void
+DecisionKit.Jev.Protocol.AnswerMapper.AnswerMapper(DecisionKit.Jev.Protocol.JevMappingOptions! options) -> void
+DecisionKit.Jev.Protocol.AnswerMapper.Options.get -> DecisionKit.Jev.Protocol.JevMappingOptions!
+DecisionKit.Jev.Protocol.AnswerMapper.ToDomain(DecisionKit.Questions.Question! question, DecisionKit.Jev.Models.JevAnswer! answer) -> DecisionKit.Answers.Answer!
+DecisionKit.Jev.Protocol.ErrorMapper
+DecisionKit.Jev.Protocol.ErrorMapper.ErrorMapper() -> void
+DecisionKit.Jev.Protocol.ErrorMapper.ErrorMapper(DecisionKit.Jev.Protocol.JevMappingOptions! options) -> void
+DecisionKit.Jev.Protocol.ErrorMapper.Options.get -> DecisionKit.Jev.Protocol.JevMappingOptions!
+DecisionKit.Jev.Protocol.ErrorMapper.ToDomain(DecisionKit.Jev.Models.JevErrorResponse? body, DecisionKit.Jev.Protocol.JevErrorContext context) -> DecisionKit.Errors.DecisionError!
+DecisionKit.Jev.Protocol.ErrorMapper.ToException(DecisionKit.Jev.Models.JevErrorResponse? body, DecisionKit.Jev.Protocol.JevErrorContext context) -> DecisionKit.Errors.DecisionException!
+DecisionKit.Jev.Protocol.JevAnswers
+DecisionKit.Jev.Protocol.JevErrorContext
+DecisionKit.Jev.Protocol.JevErrorContext.Equals(DecisionKit.Jev.Protocol.JevErrorContext other) -> bool
+DecisionKit.Jev.Protocol.JevErrorContext.JevErrorContext() -> void
+DecisionKit.Jev.Protocol.JevErrorContext.JevErrorContext(int statusCode) -> void
+DecisionKit.Jev.Protocol.JevErrorContext.JevErrorContext(int? statusCode, System.TimeSpan? retryAfter, string? requestId) -> void
+DecisionKit.Jev.Protocol.JevErrorContext.RequestId.get -> string?
+DecisionKit.Jev.Protocol.JevErrorContext.RetryAfter.get -> System.TimeSpan?
+DecisionKit.Jev.Protocol.JevErrorContext.StatusCode.get -> int?
+DecisionKit.Jev.Protocol.JevMappingOptions
+DecisionKit.Jev.Protocol.JevMappingOptions.JevMappingOptions() -> void
+DecisionKit.Jev.Protocol.JevMappingOptions.Model.get -> string!
+DecisionKit.Jev.Protocol.JevMappingOptions.Model.init -> void
+DecisionKit.Jev.Protocol.JevMappingOptions.PreserveRawPayloads.get -> bool
+DecisionKit.Jev.Protocol.JevMappingOptions.PreserveRawPayloads.init -> void
+DecisionKit.Jev.Protocol.JevMappingOptions.ProviderName.get -> string!
+DecisionKit.Jev.Protocol.JevMappingOptions.ProviderName.init -> void
+DecisionKit.Jev.Protocol.JevOptionLabel
+DecisionKit.Jev.Protocol.JevProtocol
+DecisionKit.Jev.Protocol.JevQuestionTypes
+DecisionKit.Jev.Protocol.QuestionMapper
+DecisionKit.Jev.Protocol.QuestionMapper.Options.get -> DecisionKit.Jev.Protocol.JevMappingOptions!
+DecisionKit.Jev.Protocol.QuestionMapper.QuestionMapper() -> void
+DecisionKit.Jev.Protocol.QuestionMapper.QuestionMapper(DecisionKit.Jev.Protocol.JevMappingOptions! options) -> void
+DecisionKit.Jev.Protocol.QuestionMapper.ToWire(DecisionKit.Questions.Question! question) -> DecisionKit.Jev.Models.JevQuestion!
+DecisionKit.Jev.Protocol.RequestMapper
+DecisionKit.Jev.Protocol.RequestMapper.Options.get -> DecisionKit.Jev.Protocol.JevMappingOptions!
+DecisionKit.Jev.Protocol.RequestMapper.RequestMapper() -> void
+DecisionKit.Jev.Protocol.RequestMapper.RequestMapper(DecisionKit.Jev.Protocol.JevMappingOptions! options) -> void
+DecisionKit.Jev.Protocol.RequestMapper.RequestMapper(DecisionKit.Jev.Protocol.QuestionMapper! questionMapper) -> void
+DecisionKit.Jev.Protocol.RequestMapper.ToWire(DecisionKit.Providers.DecisionRequest! request) -> DecisionKit.Jev.Models.JevRequest!
+DecisionKit.Jev.Protocol.ResponseMapper
+DecisionKit.Jev.Protocol.ResponseMapper.Options.get -> DecisionKit.Jev.Protocol.JevMappingOptions!
+DecisionKit.Jev.Protocol.ResponseMapper.ResponseMapper() -> void
+DecisionKit.Jev.Protocol.ResponseMapper.ResponseMapper(DecisionKit.Jev.Protocol.AnswerMapper! answerMapper, System.TimeProvider! timeProvider) -> void
+DecisionKit.Jev.Protocol.ResponseMapper.ResponseMapper(DecisionKit.Jev.Protocol.JevMappingOptions! options) -> void
+DecisionKit.Jev.Protocol.ResponseMapper.ResponseMapper(DecisionKit.Jev.Protocol.JevMappingOptions! options, System.TimeProvider! timeProvider) -> void
+DecisionKit.Jev.Protocol.ResponseMapper.ToDomain(DecisionKit.Providers.DecisionRequest! request, DecisionKit.Jev.Models.JevResponse! response) -> DecisionKit.Results.DecisionResult!
+DecisionKit.Jev.Protocol.ResponseMapper.ToDomain(DecisionKit.Providers.DecisionRequest! request, DecisionKit.Jev.Models.JevResponse! response, string? providerRequestId) -> DecisionKit.Results.DecisionResult!
+DecisionKit.Jev.Questions.JevScoreQuestion
+DecisionKit.Jev.Questions.JevScoreQuestion.CreateAnswer(double value) -> DecisionKit.Answers.ScoreAnswer!
+DecisionKit.Jev.Questions.JevScoreQuestion.JevScoreQuestion(DecisionKit.Identifiers.QuestionId id, string! prompt, System.Collections.Generic.IEnumerable<string!>! levels) -> void
+DecisionKit.Jev.Questions.JevScoreQuestion.Levels.get -> System.Collections.Generic.IReadOnlyList<string!>!
+DecisionKit.Jev.Questions.JevScoreQuestion.Maximum.get -> double
+DecisionKit.Jev.Questions.JevScoreQuestion.Minimum.get -> double
+DecisionKit.Jev.Questions.JevScoreQuestion.TryGetLevel(int level, out string! description) -> bool
+DecisionKit.Jev.Resilience.JevRetryPolicy
+DecisionKit.Jev.Resilience.JevRetryPolicy.BackoffFactor.get -> double
+DecisionKit.Jev.Resilience.JevRetryPolicy.BackoffFactor.init -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.Classify(DecisionKit.Errors.DecisionError! error) -> DecisionKit.Errors.DecisionRetryability
+DecisionKit.Jev.Resilience.JevRetryPolicy.GetDelay(int completedAttempts, System.TimeSpan? retryAfter) -> System.TimeSpan
+DecisionKit.Jev.Resilience.JevRetryPolicy.Idempotency.get -> DecisionKit.Identifiers.DecisionIdempotencyPolicy
+DecisionKit.Jev.Resilience.JevRetryPolicy.Idempotency.init -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.InitialDelay.get -> System.TimeSpan
+DecisionKit.Jev.Resilience.JevRetryPolicy.InitialDelay.init -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.IsEnabled.get -> bool
+DecisionKit.Jev.Resilience.JevRetryPolicy.JevRetryPolicy() -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.Jitter.get -> double
+DecisionKit.Jev.Resilience.JevRetryPolicy.Jitter.init -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.MaxAttempts.get -> int
+DecisionKit.Jev.Resilience.JevRetryPolicy.MaxAttempts.init -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.MaxDelay.get -> System.TimeSpan
+DecisionKit.Jev.Resilience.JevRetryPolicy.MaxDelay.init -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.MaxElapsedTime.get -> System.TimeSpan
+DecisionKit.Jev.Resilience.JevRetryPolicy.MaxElapsedTime.init -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.NonRetryableStatusCodes.get -> System.Collections.Generic.IReadOnlySet<int>!
+DecisionKit.Jev.Resilience.JevRetryPolicy.NonRetryableStatusCodes.init -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.RespectRetryAfter.get -> bool
+DecisionKit.Jev.Resilience.JevRetryPolicy.RespectRetryAfter.init -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.RetryableStatusCodes.get -> System.Collections.Generic.IReadOnlySet<int>!
+DecisionKit.Jev.Resilience.JevRetryPolicy.RetryableStatusCodes.init -> void
+DecisionKit.Jev.Resilience.JevRetryPolicy.RetryUnknownFailures.get -> bool
+DecisionKit.Jev.Resilience.JevRetryPolicy.RetryUnknownFailures.init -> void
+DecisionKit.Jev.Serialization.JevJsonSerialization
+override DecisionKit.Jev.Authentication.JevApiKey.Equals(object? obj) -> bool
+override DecisionKit.Jev.Authentication.JevApiKey.GetHashCode() -> int
+override DecisionKit.Jev.Authentication.JevApiKey.ToString() -> string!
+override DecisionKit.Jev.Client.JevEndpoint.Equals(object? obj) -> bool
+override DecisionKit.Jev.Client.JevEndpoint.GetHashCode() -> int
+override DecisionKit.Jev.Client.JevEndpoint.ToString() -> string!
+override DecisionKit.Jev.Protocol.JevErrorContext.Equals(object? obj) -> bool
+override DecisionKit.Jev.Protocol.JevErrorContext.GetHashCode() -> int
+static DecisionKit.Jev.Authentication.JevApiKey.None.get -> DecisionKit.Jev.Authentication.JevApiKey
+static DecisionKit.Jev.Authentication.JevApiKey.operator !=(DecisionKit.Jev.Authentication.JevApiKey left, DecisionKit.Jev.Authentication.JevApiKey right) -> bool
+static DecisionKit.Jev.Authentication.JevApiKey.operator ==(DecisionKit.Jev.Authentication.JevApiKey left, DecisionKit.Jev.Authentication.JevApiKey right) -> bool
+static DecisionKit.Jev.Client.JevEndpoint.Default.get -> DecisionKit.Jev.Client.JevEndpoint!
+static DecisionKit.Jev.Client.JevProviderOptions.Default.get -> DecisionKit.Jev.Client.JevProviderOptions!
+static DecisionKit.Jev.Protocol.AnswerMapper.Default.get -> DecisionKit.Jev.Protocol.AnswerMapper!
+static DecisionKit.Jev.Protocol.ErrorMapper.Default.get -> DecisionKit.Jev.Protocol.ErrorMapper!
+static DecisionKit.Jev.Protocol.JevAnswers.TryGetConfidence(DecisionKit.Answers.Answer! answer, out double confidence) -> bool
+static DecisionKit.Jev.Protocol.JevAnswers.TryGetLegend(DecisionKit.Answers.Answer! answer, out System.Collections.Generic.IReadOnlyDictionary<string!, object?>! legend) -> bool
+static DecisionKit.Jev.Protocol.JevAnswers.TryGetLevelProbabilities(DecisionKit.Answers.Answer! answer, out System.Collections.Generic.IReadOnlyDictionary<string!, object?>! probabilities) -> bool
+static DecisionKit.Jev.Protocol.JevAnswers.TryGetRawPayload(DecisionKit.Answers.Answer! answer, out string! payload) -> bool
+static DecisionKit.Jev.Protocol.JevErrorContext.None.get -> DecisionKit.Jev.Protocol.JevErrorContext
+static DecisionKit.Jev.Protocol.JevErrorContext.operator !=(DecisionKit.Jev.Protocol.JevErrorContext left, DecisionKit.Jev.Protocol.JevErrorContext right) -> bool
+static DecisionKit.Jev.Protocol.JevErrorContext.operator ==(DecisionKit.Jev.Protocol.JevErrorContext left, DecisionKit.Jev.Protocol.JevErrorContext right) -> bool
+static DecisionKit.Jev.Protocol.JevMappingOptions.Default.get -> DecisionKit.Jev.Protocol.JevMappingOptions!
+static DecisionKit.Jev.Protocol.JevOptionLabel.For(object! option) -> string?
+static DecisionKit.Jev.Protocol.JevOptionLabel.Matches(object! option, string? label) -> bool
+static DecisionKit.Jev.Protocol.QuestionMapper.Default.get -> DecisionKit.Jev.Protocol.QuestionMapper!
+static DecisionKit.Jev.Protocol.RequestMapper.Default.get -> DecisionKit.Jev.Protocol.RequestMapper!
+static DecisionKit.Jev.Protocol.ResponseMapper.Default.get -> DecisionKit.Jev.Protocol.ResponseMapper!
+static DecisionKit.Jev.Resilience.JevRetryPolicy.None.get -> DecisionKit.Jev.Resilience.JevRetryPolicy!
+static DecisionKit.Jev.Resilience.JevRetryPolicy.Standard.get -> DecisionKit.Jev.Resilience.JevRetryPolicy!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.AnswerTypeInfo.get -> System.Text.Json.Serialization.Metadata.JsonTypeInfo<DecisionKit.Jev.Models.JevAnswer!>!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.DeserializeError(string! json) -> DecisionKit.Jev.Models.JevErrorResponse!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.DeserializeErrorAsync(System.IO.Stream! json, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<DecisionKit.Jev.Models.JevErrorResponse!>
+static DecisionKit.Jev.Serialization.JevJsonSerialization.DeserializeRequest(string! json) -> DecisionKit.Jev.Models.JevRequest!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.DeserializeResponse(string! json) -> DecisionKit.Jev.Models.JevResponse!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.DeserializeResponseAsync(System.IO.Stream! json, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<DecisionKit.Jev.Models.JevResponse!>
+static DecisionKit.Jev.Serialization.JevJsonSerialization.ErrorTypeInfo.get -> System.Text.Json.Serialization.Metadata.JsonTypeInfo<DecisionKit.Jev.Models.JevErrorResponse!>!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.QuestionTypeInfo.get -> System.Text.Json.Serialization.Metadata.JsonTypeInfo<DecisionKit.Jev.Models.JevQuestion!>!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.RequestTypeInfo.get -> System.Text.Json.Serialization.Metadata.JsonTypeInfo<DecisionKit.Jev.Models.JevRequest!>!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.ResponseTypeInfo.get -> System.Text.Json.Serialization.Metadata.JsonTypeInfo<DecisionKit.Jev.Models.JevResponse!>!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.Serialize(DecisionKit.Jev.Models.JevAnswer! answer) -> string!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.Serialize(DecisionKit.Jev.Models.JevErrorResponse! error) -> string!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.Serialize(DecisionKit.Jev.Models.JevRequest! request) -> string!
+static DecisionKit.Jev.Serialization.JevJsonSerialization.Serialize(DecisionKit.Jev.Models.JevResponse! response) -> string!
