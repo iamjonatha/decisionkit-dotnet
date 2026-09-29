@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 env:
   DOTNET_NOLOGO: true
@@ -53,8 +54,14 @@ jobs:
       - name: Pack
         run: dotnet pack DecisionKit.slnx -c Release --no-build -o ./nupkg -p:Version=${{ steps.version.outputs.value }}
 
+      - name: Authenticate to NuGet
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          user: iamjonatha
+
       - name: Publish to NuGet
-        run: dotnet nuget push "./nupkg/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key "${{ secrets.NUGET_API_KEY }}" --skip-duplicate
+        run: dotnet nuget push "./nupkg/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" --skip-duplicate
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v3

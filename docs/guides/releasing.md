@@ -19,6 +19,33 @@ allowance ends at `1.0.0`.
 All packages share a single version, declared once in `VersionPrefix` in
 `Directory.Build.props`.
 
+## Publishing credentials
+
+The workflow does not hold a NuGet API key. It authenticates through a nuget.org
+[trusted publishing](https://learn.microsoft.com/nuget/nuget-org/trusted-publishing) policy:
+the job presents its GitHub OIDC token, nuget.org validates it against the policy and returns
+an API key that lives for one hour. Nothing long-lived is stored in the repository.
+
+The policy on nuget.org must describe this workflow exactly, or the exchange is refused:
+
+| Policy field | Value |
+| --- | --- |
+| Package Owner | the nuget.org account that owns the packages |
+| CI/CD Provider | GitHub Actions |
+| Repository Owner | `iamjonatha` |
+| Repository | `decisionkit-dotnet` |
+| Workflow File | `release.yml` — the file name alone, never the path |
+| Environment | `nuget`, matching the `environment:` of the release job |
+| Scope | Push new packages and package versions |
+| Glob pattern | `DecisionKit.*` |
+
+Renaming this file, or the job's environment, breaks publishing until the policy is updated
+to match.
+
+A policy starts out active for seven days only. The first successful publish makes it
+permanent; if nothing is published in that window it goes inactive and has to be renewed on
+nuget.org, which costs nothing but a click.
+
 ## Steps
 
 1. **Confirm CI is green on `main`** for the commit you intend to release.
@@ -62,8 +89,9 @@ All packages share a single version, declared once in `VersionPrefix` in
    git push origin vx.y.z
    ```
 
-9. **Let the release workflow run.** It builds, tests, packs, pushes to NuGet using the
-   `NUGET_API_KEY` secret from the `nuget` environment, and creates the GitHub release.
+9. **Let the release workflow run.** It builds, tests, packs, exchanges the job's OIDC token
+   for a one-hour NuGet key through the trusted publishing policy, pushes, and creates the
+   GitHub release. No long-lived key is stored anywhere.
 
 10. **Verify** that the packages are listed on NuGet and that the GitHub release notes are
     correct.
