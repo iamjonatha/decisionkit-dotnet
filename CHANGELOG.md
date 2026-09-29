@@ -9,6 +9,13 @@ While the major version is `0`, the public API may change in any minor release.
 
 ## [Unreleased]
 
+### Changed
+
+- The `Microsoft.Extensions.*` dependencies are now pinned per target framework: the
+  `net8.0` assets ask for the 8.0 line, the `net10.0` assets for the 10.0 line. Until
+  now both target frameworks demanded 10.0, which forced a .NET 8 application onto the
+  .NET 10 extension stack for no reason.
+
 ## [0.1.0] - 2026-09-29
 
 ### Added
