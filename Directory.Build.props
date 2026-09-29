@@ -15,7 +15,7 @@
       Set it to the previous release right after publishing, so that package validation can
       compare the next build against it.
     -->
-    <DecisionKitBaselineVersion></DecisionKitBaselineVersion>
+    <DecisionKitBaselineVersion>0.1.0</DecisionKitBaselineVersion>
 
     <!-- Repository -->
     <RepositoryUrl>https://github.com/iamjonatha/decisionkit-dotnet</RepositoryUrl>
