@@ -9,6 +9,8 @@ While the major version is `0`, the public API may change in any minor release.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-09-29
+
 ### Added
 
 - Repository foundation: solution layout, central package management, multi-targeting
@@ -168,4 +170,5 @@ While the major version is `0`, the public API may change in any minor release.
   to build a choice answer that keeps its metadata. `ChoiceQuestion<TOption>` also exposes
   typed distribution overloads of `CreateAnswer`.
 
-[Unreleased]: https://github.com/iamjonatha/decisionkit-dotnet/commits/main
+[Unreleased]: https://github.com/iamjonatha/decisionkit-dotnet/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/iamjonatha/decisionkit-dotnet/releases/tag/v0.1.0
