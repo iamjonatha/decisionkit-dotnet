@@ -340,9 +340,13 @@ public sealed class JevRetryTests
 
     private sealed class RetryFixture : IDisposable
     {
-        private const int MaxSteps = 20_000;
+        private const int QuietTurns = 4;
+
+        private const int MaxTurns = 512;
 
         private static readonly TimeSpan s_step = TimeSpan.FromMilliseconds(25);
+
+        private static readonly TimeSpan s_budget = TimeSpan.FromSeconds(60);
 
         private readonly HttpClient _http;
 
@@ -390,24 +394,58 @@ public sealed class JevRetryTests
         /// </summary>
         /// <remarks>
         /// The clock is only ever nudged, never jumped to a deadline, so a test cannot accidentally
-        /// skip past a budget it meant to stay inside. The step count is bounded so that a deadlock
-        /// fails the test rather than hanging the suite.
+        /// skip past a budget it meant to stay inside. The virtual budget is bounded so that a
+        /// deadlock fails the test rather than hanging the suite.
         /// </remarks>
         public async Task<DecisionResult> DecideAsync()
         {
             Task<DecisionResult> pending =
                 Provider.DecideAsync(JevScenario.CreateRequest(), TestContext.Current.CancellationToken);
 
-            for (int step = 0; step < MaxSteps && !pending.IsCompleted; step++)
+            for (TimeSpan advanced = TimeSpan.Zero; advanced < s_budget; advanced += s_step)
             {
-                await Task.Yield();
+                if (await SettlesAsync(pending))
+                {
+                    return await pending;
+                }
 
                 Time.Advance(s_step);
             }
 
-            Assert.True(pending.IsCompleted, "The decision never settled, so something is waiting on a clock that is not the fake one.");
+            Assert.True(
+                await SettlesAsync(pending),
+                "The decision never settled, so something is waiting on a clock that is not the fake one.");
 
             return await pending;
+        }
+
+        /// <summary>
+        /// Gives the decision every chance to move before the clock is allowed to.
+        /// </summary>
+        /// <remarks>
+        /// A single yield is not enough. The pump would outrun the provider, advance the fake clock
+        /// past the moment at which the provider later registers its delay, and leave behind a timer
+        /// that can never fire — which is indistinguishable from a deadlock. Moving the clock is only
+        /// safe once the decision has settled, or once the thread pool has nothing left to run and the
+        /// decision is therefore waiting on the clock and on nothing else.
+        /// </remarks>
+        private static async Task<bool> SettlesAsync(Task pending)
+        {
+            int quiet = 0;
+
+            for (int turn = 0; turn < MaxTurns && quiet < QuietTurns; turn++)
+            {
+                if (pending.IsCompleted)
+                {
+                    return true;
+                }
+
+                await Task.Yield();
+
+                quiet = ThreadPool.PendingWorkItemCount == 0 ? quiet + 1 : 0;
+            }
+
+            return pending.IsCompleted;
         }
 
         public void Dispose()
