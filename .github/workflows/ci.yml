@@ -98,7 +98,9 @@ jobs:
 
       # A dry run proves every benchmark still compiles and executes. Measured numbers from a
       # shared CI runner would be noise, so no timings are collected or published here.
+      # An explicit bash shell turns on pipefail, so a build failure is not hidden behind tee.
       - name: Dry run
+        shell: bash
         run: |
           dotnet run --project benchmarks/DecisionKit.Benchmarks -c Release -- --filter '*' --job Dry | tee benchmarks.log
           if grep -q 'Benchmarks with issues' benchmarks.log; then
