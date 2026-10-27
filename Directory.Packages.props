@@ -45,9 +45,9 @@
   </ItemGroup>
 
   <ItemGroup Label="Test tooling">
-    <PackageVersion Include="xunit.v3" Version="4.0.1" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.11.2" />
-    <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="10.11.0" />
+    <PackageVersion Include="xunit.v3" Version="4.0.2" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.12.0" />
+    <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="10.10.0" />
   </ItemGroup>
 
   <ItemGroup Label="Host composition, used by tests and samples, .NET 8" Condition="'$(TargetFramework)' == 'net8.0'">
